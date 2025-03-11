@@ -1,0 +1,9 @@
+{
+  "name": "genai-lambda",
+  "version": "1.0.0",
+  "description": "Lambda function for GenAI integration",
+  "main": "genai-lambda.js",
+  "dependencies": {
+    "aws-sdk": "^2.1510.0"
+  }
+}

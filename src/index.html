@@ -11,13 +11,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-        crossorigin="" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
-
-
     <style>
         html,
         body {
@@ -236,65 +229,9 @@
         </div>
     </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-        crossorigin=""></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="sjc.js" type="text/javascript"></script>
-    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js"
-        charset="utf-8"></script>
-    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="./bundle.js" type="text/javascript"></script>    
 
 
-    <script>
-        var map = L.map('map').setView([40.568032, -111.929995], 11);
-        var token = "pk.eyJ1IjoiamJlamFyIiwiYSI6ImNtODE3YWk5cDEzMncybnE0NmUyM3UzZ2cifQ.pgRNleoNLjuKVTzIc_P3Tg" // Mapbox
-        var apiKey = "AIzaSyCzTpF4k7rKOyavMStBYjqBxanEhTQXGLI"; //Google
-        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + token, {
-            maxZoom: 18,
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-                '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-                'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            id: 'mapbox/light-v11',
-            tileSize: 512,
-            zoomOffset: -1
-        }).addTo(map);
-        var myStyle = {
-            "color": "#307BFF",
-            "weight": 12,
-            "opacity": 0.65
-        };
-        L.geoJSON(sjc, {
-            style: myStyle
-        }).addTo(map);
-        var lc = L.control.locate({
-            flyTo: true,
-            keepCurrentZoomLevel: true
-        }).addTo(map);
-        // Create a geocoding control
-        const geocoder = L.Control.geocoder({ geocoder: new L.Control.Geocoder.Google({ apiKey }) });
-
-        // Add it to the map
-        geocoder.addTo(map);
-
-        // Handle the result when a location is selected
-        geocoder.on('markgeocode', function (e) {
-            const latlng = e.geocode.center;
-            map.flyTo(latlng, 15);
-
-            // Optionally add a marker
-            L.marker(latlng).addTo(map);
-        });
-
-        $("#locate").click(function (e) {
-            e.preventDefault();
-            lc.start();
-        });
-    </script>
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
