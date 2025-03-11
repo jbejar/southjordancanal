@@ -53,4 +53,3 @@ applications:
                 cache:
                   paths:
                     - lambda/node_modules/**/*
-          - lambda/node_modules/**/*
