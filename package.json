@@ -5,7 +5,7 @@
   "main": "sjc.js",
   "scripts": {
     "build": "webpack --mode production",
-    "build:lambda": "cd lambda && zip -r ../lambda/dist/function.zip .",
+    "build:lambda": "mkdir -p lambda/dist && cd lambda && zip -r ../lambda/dist/function.zip .",
     "start": "webpack serve --mode development --hot",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
