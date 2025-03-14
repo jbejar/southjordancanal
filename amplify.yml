@@ -23,6 +23,13 @@ applications:
         baseDirectory: lambda/dist
         files:
           - '**/*'
+        api:
+          - path: /genai
+            method: GET
+            function: genAi-lambda
+          - path: /genai
+            method: POST
+            function: genAi-lambda
       cache:
         paths:
           version: 1
