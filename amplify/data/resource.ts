@@ -1,3 +1,4 @@
+// https://docs.amplify.aws/javascript/build-a-backend/data/custom-business-logic/connect-bedrock/
 import {
     type ClientSchema,
     a,

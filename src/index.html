@@ -22,6 +22,106 @@
             width: 100%;
             height: 450px;
         }
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+        }
+        
+        .chat-header {
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+        
+        .chat-input-container {
+            padding: 10px;
+            border-top: 1px solid #ddd;
+        }
+        
+        .message {
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+        
+        .user-message {
+            background: #007bff;
+            color: white;
+            margin-left: auto;
+        }
+        
+        .bot-message {
+            background: #f1f1f1;
+        }
+
+        .chat-header {
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0 5px;
+            line-height: 1;
+        }
+        
+        .chat-close-btn:hover {
+            opacity: 0.8;
+        }
+        
+        .chat-widget.hidden {
+            display: none;
+        }
+        .chat-open-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        
+        .chat-open-btn:hover {
+            background: #0056b3;
+        }
+        
+        .chat-open-btn.hidden {
+            display: none;
+        }
+        
+        
     </style>
 </head>
 
@@ -227,6 +327,26 @@
             All inquires and questions will be handled through email. You can expect a response within 1-2 weeks.
             We are not water brokers, and do not set the value or the cost of shares of stock.
         </div>
+        <button class="chat-open-btn hidden">
+            <i class="fas fa-comments"></i>
+        </button>
+        <div class="chat-widget">
+            <div class="chat-header">
+                <h5 class="m-0">Canal Assistant</h5>
+                <button class="chat-close-btn">&times;</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+            </div>
+            <div class="chat-input-container">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="chatInput" placeholder="Type your message...">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" id="sendMessage">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     </div>
 
     <script src="./bundle.js" type="text/javascript"></script>    

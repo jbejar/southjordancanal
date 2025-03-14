@@ -8,6 +8,11 @@ module.exports = {
     filename: 'bundle.js'
   },
   mode: 'production',
+  resolve: {
+    alias: {
+      '@': __dirname
+    }
+  },
   module: {
     rules: [
       {
