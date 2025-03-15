@@ -5,17 +5,17 @@ backend:
       commands:
         - npm install
         - amplifyPush --simple
+  cache:
+    paths:
+      - node_modules/**/*
 applications:
   - frontend:
       phases:
         build:
           commands:
-            - npm install
+            - npx amplify sandbox --start
             - npm run build
       artifacts:
         baseDirectory: dist
         files:
           - '**/*'
-      cache:
-        paths:
-          - node_modules/**/*
