@@ -5,14 +5,12 @@ backend:
       commands:
         - npm install
         - amplifyPush --simple
-  cache:
-    paths:
-      - node_modules/**/*
 applications:
   - frontend:
       phases:
         build:
           commands:
+            - npm install
             - npm run build
       artifacts:
         baseDirectory: dist
