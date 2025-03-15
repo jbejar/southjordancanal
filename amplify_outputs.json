@@ -11,7 +11,27 @@
       "version": 1,
       "models": {},
       "enums": {},
-      "nonModels": {},
+      "nonModels": {
+        "Message": {
+          "name": "Message",
+          "fields": {
+            "prompt": {
+              "name": "prompt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "isUser": {
+              "name": "isUser",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": true,
+              "attributes": []
+            }
+          }
+        }
+      },
       "queries": {
         "generateLlama": {
           "name": "generateLlama",
@@ -19,10 +39,31 @@
           "type": "String",
           "isRequired": false,
           "arguments": {
+            "messages": {
+              "name": "messages",
+              "isArray": false,
+              "type": {
+                "input": "MessageInput"
+              },
+              "isRequired": false
+            }
+          }
+        }
+      },
+      "inputs": {
+        "MessageInput": {
+          "name": "MessageInput",
+          "attributes": {
             "prompt": {
               "name": "prompt",
               "isArray": false,
               "type": "String",
+              "isRequired": true
+            },
+            "isUser": {
+              "name": "isUser",
+              "isArray": false,
+              "type": "Boolean",
               "isRequired": true
             }
           }

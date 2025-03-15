@@ -16,10 +16,14 @@ import {
   });
   
   const schema = a.schema({
+    Message: a.customType(
+      {
+        prompt: a.string().required(),
+        isUser: a.boolean().required()
+      }),
     generateLlama: a
       .query()
-      .arguments({ prompt: a.string().required() })
-      .returns(a.string())
+      .arguments({ messages: a.ref("Message").array().required() })      .returns(a.string())
       .authorization((allow) => [allow.publicApiKey()])
       .handler(a.handler.function(generateLlamaFunction)),
   });

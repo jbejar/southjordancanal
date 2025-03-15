@@ -15,8 +15,9 @@ export const handler: Schema["generateLlama"]["functionHandler"] = async (
   context
 ) => {
   // User prompt
-  const prompt = event.arguments.prompt;
-
+  const prompt = event.arguments.messages.map(m => {
+    return generateMessage(m?.prompt || "", m?.isUser || false
+  )}).join("");
   // Invoke model
   const input = {
     modelId: process.env.MODEL_ID,
@@ -24,8 +25,7 @@ export const handler: Schema["generateLlama"]["functionHandler"] = async (
     accept: "application/json",
     body: JSON.stringify({
         "prompt": `<|begin_of_text|><|start_header_id|>system<|end_header_id|>
-    ${system}<|eot_id|><|start_header_id|>user<|end_header_id|>
-    ${[prompt]}<|eot_id|><|start_header_id|>assistant<|end_header_id|>`,
+    ${system}<|eot_id|>${prompt}`,
         "temperature": 0.08,
         "top_p": 0.9,
         "max_gen_len": 100
@@ -41,3 +41,8 @@ export const handler: Schema["generateLlama"]["functionHandler"] = async (
 
   return data.content[0].text;
 };
+
+function generateMessage(prompt: string, isUser: boolean) {
+  return `<|start_header_id|>${isUser ? "user": "assistant"}<|end_header_id|>
+    ${[prompt]}<|eot_id|>`;
+}
