@@ -14,7 +14,7 @@ applications:
         paths:
           - node_modules/**/*
     backend:
-    phases:
-      build:
-        commands:
-          - amplifyPush --simple
+      phases:
+        build:
+          commands:
+            - amplifyPush --simple
