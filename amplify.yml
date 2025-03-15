@@ -1,10 +1,4 @@
 version: 1
-backend:
-  phases:
-    build:
-      commands:
-        - npm install
-        - amplifyPush --simple
 applications:
   - frontend:
       phases:
@@ -16,3 +10,9 @@ applications:
         baseDirectory: dist
         files:
           - '**/*'
+    backend:
+      phases:
+        build:
+          commands:
+            - npm install
+            - amplifyPush --simple
