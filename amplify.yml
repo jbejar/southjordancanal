@@ -13,7 +13,7 @@ applications:
       phases:
         build:
           commands:
-            - npx amplify sandbox --start
+            - npx ampx sandbox --start
             - npm run build
       artifacts:
         baseDirectory: dist
