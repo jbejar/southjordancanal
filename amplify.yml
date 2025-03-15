@@ -1,4 +1,10 @@
 version: 1
+backend:
+  phases:
+    build:
+      commands:
+        - npm install
+        - amplifyPush --simple
 applications:
   - frontend:
       phases:
