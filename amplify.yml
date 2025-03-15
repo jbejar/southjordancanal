@@ -15,4 +15,4 @@ applications:
         build:
           commands:
             - npm install
-            - amplifyPush --simple
+            
