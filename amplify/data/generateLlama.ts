@@ -15,9 +15,8 @@ export const handler: Schema["generateLlama"]["functionHandler"] = async (
   context
 ) => {
   // User prompt
-  const prompt = event.arguments.messages.map(m => {
-    return generateMessage(m?.prompt || "", m?.isUser || false
-  )}).join("");
+  const prompt = Array.isArray(event.arguments.messages) ? event.arguments.messages.map(m => {    return generateMessage(m?.prompt || "", m?.isUser || false 
+  )}).join("") : "";
   // Invoke model
   const input = {
     modelId: process.env.MODEL_ID,
@@ -39,7 +38,7 @@ export const handler: Schema["generateLlama"]["functionHandler"] = async (
   // Parse the response and return the generated haiku
   const data = JSON.parse(Buffer.from(response.body).toString());
 
-  return data.content[0].text;
+  return data;
 };
 
 function generateMessage(prompt: string, isUser: boolean) {

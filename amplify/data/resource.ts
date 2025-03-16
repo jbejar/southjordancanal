@@ -6,7 +6,7 @@ import {
     defineFunction,
   } from "@aws-amplify/backend";
   
-  export const MODEL_ID = "meta.llama3-8b-instruct-v1:0";
+  export const MODEL_ID = "meta.llama3-1-8b-instruct-v1:0";
   
   export const generateLlamaFunction = defineFunction({
     entry: "./generateLlama.ts",
@@ -16,14 +16,10 @@ import {
   });
   
   const schema = a.schema({
-    Message: a.customType(
-      {
-        prompt: a.string().required(),
-        isUser: a.boolean().required()
-      }),
+    
     generateLlama: a
       .query()
-      .arguments({ messages: a.ref("Message").array().required() })      .returns(a.string())
+      .arguments({ messages: a.json().required() })      .returns(a.string())
       .authorization((allow) => [allow.publicApiKey()])
       .handler(a.handler.function(generateLlamaFunction)),
   });

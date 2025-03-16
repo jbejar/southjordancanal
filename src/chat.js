@@ -5,31 +5,29 @@ import outputs from '@/amplify_outputs.json';
 Amplify.configure(outputs);
 
 const client = generateClient();  
-// const { data, errors } = await client.queries.generateHaiku({
-//     prompt
-//   });
 let addMessage;
+const messages = [];
 export default function useChat(cb) {
     addMessage = cb;
     return handleUserMessage;
 }
 
-function handleUserMessage(message) {
+async function handleUserMessage(message) {
     // Add user message to chat
+    messages.push({ isUser: true, prompt: message });
     addMessage(message, true);
-    
-    // Simple response logic - you can expand this
-    let response;
-    if (message.toLowerCase().includes('water')) {
-        response = "The watering season is from April 15 to October 15. For specific questions, please contact your Weir Master.";
-    } else if (message.toLowerCase().includes('fee')) {
-        response = "Transfer fee is $200. For detailed fee information, please check the fees table on our website.";
-    } else if (message.toLowerCase().includes('contact')) {
-        response = "You can contact our Secretary Annette Bejarano at annbejar@comcast.net";
+    const { data, errors } = await client.queries.generateLlama({
+        messages: JSON.stringify(messages)
+    });
+    if(!errors) {
+        const response = parseLlama(data);
+        messages.push({ isUser: false, prompt: response });
+        addMessage(response);
     } else {
-        response = "For specific inquiries, please email us. You can expect a response within 1-2 weeks.";
+        console.error(errors);
     }
-    
-    // Add bot response after a short delay
-    setTimeout(() => addMessage(response), 500);
+}
+// take in "{generation=<|start_header_id|>assistant<|end_header_id|>\n\nThe water turns on April 15., prompt_token_count=743, generation_token_count=13, stop_reason=stop}" and returns just the response
+function parseLlama(response) {
+    return response.split('\n\n')[1].split(", prompt_token_count")[0];
 }
